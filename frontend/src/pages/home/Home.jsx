@@ -1,9 +1,16 @@
 import React from 'react'
+import "./Home.css"
+import ProfileSide from '../../components/profileSide/ProfileSide'
 
-const home = () => {
+const Home = () => {
   return (
-    <div>home</div>
+    <div className='Home'>
+      <ProfileSide />
+      <div className="postSide">Posts</div>
+      <div className="rightSide">Rights</div>
+
+    </div>
   )
 }
 
-export default home
+export default Home
