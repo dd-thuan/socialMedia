@@ -5,7 +5,7 @@
 
 .Search {
   display: flex;
-  background-color: rgba(30, 52, 62, 0.15);
+  background-color: var(--inputColor);
   border-radius: 10px;
   padding: 5px;
 }
