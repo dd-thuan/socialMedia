@@ -1,5 +1,6 @@
 import React from 'react'
-import Logo from "../../img/logo.png";
+import ProfileImg from "../../img/Lock.png";
+import CoverImg from "../../img/Bee.png";
 import "./ProfileCard.css";
 
 const ProfileCard = () => {
@@ -7,8 +8,8 @@ const ProfileCard = () => {
   return (
     <div className='profileCard'>
       <div className="profileImages">
-        <img src={Logo} alt="" />
-        <img src={Logo} alt="" />
+        <img src={CoverImg} alt="" />
+        <img src={ProfileImg} alt="" />
       </div>
 
       <div className="profileName">

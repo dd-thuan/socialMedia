@@ -1,7 +1,14 @@
-import React from 'react'
+const app = require("./app");
 
-export const server = () => {
-  return (
-    <div>server</div>
-  )
+const dotenv = require("dotenv");
+
+// Config
+if(process.env.NODE_ENV != "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
 }
+
+
+const server = app.listen(process.env.PORT, () => {
+  console.log(`"server is working on http://localhost:${process.env.PORT}`);
+});
+
