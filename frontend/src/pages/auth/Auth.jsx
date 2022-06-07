@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Auth.css";
 import Logo from "../../img/logo.png";
+import { Link } from 'react-router-dom';
 
 const Auth = () => {
   return (
@@ -12,82 +13,17 @@ const Auth = () => {
           <h6>Explore the ideas throughout the global</h6>
         </div>
       </div>
-      <SignUp />
+      {/* <SignUp /> */}
       <SignIn />
     </div>
   )
 }
 
-function SignUp() {
-  return (
-    <div className="a-right">
-      <form className='infoForm authForm'>
-        <h3>SignUp</h3>
-
-        <div>
-          <input
-            type="text"
-            placeholder='First Name'
-            className="infoInput"
-          />
-          <input
-            type="text"
-            placeholder='Last Name'
-            className="infoInput"
-          />
-        </div>
-
-        <div>
-          <input
-            type="text"
-            name='username'
-            placeholder='Username'
-            className="infoInput"
-          />
-        </div>
-
-        <div>
-          <input
-            type="password"
-            name='password'
-            placeholder='Password'
-            className="infoInput"
-          />
-          <input
-            type="password"
-            name='comfirmpassword'
-            placeholder='Comfirm Password'
-            className="infoInput"
-          />
-        </div>
-        <div>
-          <span
-            style={{
-              fontSize: "10px",
-              textDecoration: "underline",
-              cursor: "pointer",
-              color: "darkblue"
-            }}
-          >
-            Already have an account!! Login Here
-          </span>
-        </div>
-        <button className="button btn-signup" type='submit'>
-          Sign Up
-        </button>
-      </form>
-    </div>
-  )
-}
-
-
 function SignIn() {
   return (
     <div className="a-right">
       <form className='infoForm authForm'>
-        <h3>SignUp</h3>
-
-
+        <h3>Login</h3>
         <div>
           <input
             type="text"
@@ -106,6 +42,7 @@ function SignIn() {
           />
         </div>
         <div>
+          <Link to="/signup">
           <span
             style={{
               fontSize: "10px",
@@ -115,13 +52,14 @@ function SignIn() {
             }}
           >
             Don't have an account!! SignUp Here
-          </span>
+          </span></Link>
 
           <button className="button btn-signup" type='submit'>
             Sign Up
           </button>
         </div>
         <div>
+          <Link to="/forgotpassword">
           <span
             style={{
               fontSize: "10px",
@@ -133,6 +71,7 @@ function SignIn() {
           >
             Forgotten Password
           </span>
+          </Link>
         </div>
       </form>
     </div>

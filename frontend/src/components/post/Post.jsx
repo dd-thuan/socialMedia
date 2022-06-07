@@ -1,8 +1,7 @@
 import React from 'react';
-import NotLike from "../../img/comment.png";
-import Comment from "../../img/logo.png";
-import Heart from "../../img/logo.png";
-import Share from "../../img/logo.png";
+import Heart from "@iconscout/react-unicons/icons/uil-heart";
+import Share from "@iconscout/react-unicons/icons/uil-share-alt";
+import Comment from "@iconscout/react-unicons/icons/uil-comment-add";
 import "./Post.css";
 
 const Post = ({ data }) => {
@@ -10,14 +9,14 @@ const Post = ({ data }) => {
     <div className='post'>
       <img src={data.img} alt="img" />
       <div className="postAct">
-        <img src={data.liked ? Heart : NotLike} alt="" />
-        <img src={Comment} alt="" />
-        <img src={Share} alt="" />
+        {data.liked ? <Heart color='pink' /> : <Heart />}
+        <Comment />
+        <Share />
       </div>
-      <span style={{color:"var(--gray)", fontSize:"12px"}}>{data.likes} likes</span>
+      <span style={{ color: "var(--gray)", fontSize: "12px" }}>{data.likes} likes</span>
       <div className="detail">
         <span><b>{data.name}</b></span>
-        <span>{data.description}</span>
+        <span> {data.description}</span>
       </div>
     </div>
   )
