@@ -6,6 +6,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const authRoute = require("./routes/AuthRoute");
 const userRoute = require("./routes/UserRoute");
+const postRoute = require("./routes/PostRoute");
 
 // routes
 
@@ -26,7 +27,10 @@ mongoose.connect(process.env.DB_URI, {
 
 // usage of route
 app.use("/auth", authRoute);
-app.use("/user", userRoute)
+app.use("/user", userRoute);
+app.use("/post", postRoute);
+
+
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.get("*", (req, res) => {
@@ -34,3 +38,4 @@ app.get("*", (req, res) => {
 });
 
 module.exports = app;
+  
