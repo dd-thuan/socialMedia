@@ -15,7 +15,7 @@ const Auth = () => {
   const dispatch = useDispatch()
   const loading = useSelector((state) => state.authReducer.loading) 
 
-  const [isSignUp, setIsSignUp] = useState(true)
+  const [isSignUp, setIsSignUp] = useState(false)
   console.log(loading)
 
   const [data, setData] = useState(initialState); 
@@ -26,15 +26,16 @@ const Auth = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if(isSignUp) {
       data.password === data.confirmPassword 
       ? dispatch(signUp(data))
       : setConfirmPassword(false);
     } else {
-      dispatch(logIn(data));
+      dispatch(logIn(data), signUp(data));
     }
+    
   }
 
   const resetForm = (e) => {
