@@ -8,6 +8,7 @@ const cors = require("cors");
 const authRoute = require("./routes/AuthRoute");
 const userRoute = require("./routes/UserRoute");
 const postRoute = require("./routes/PostRoute");
+const uploadRoute = require("./routes/UploadRoute");
 
 // routes
 
@@ -30,8 +31,8 @@ mongoose.connect(process.env.DB_URI, {
 // usage of route
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
-app.use("/post", postRoute);
-
+app.use("/posts", postRoute);
+app.use("/upload", uploadRoute);
 
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));

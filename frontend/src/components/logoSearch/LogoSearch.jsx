@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import { logOut } from '../../actions/AuthAction';
 
 
+
+
 const LogoSearch = () => {
   const dispatch = useDispatch();
     // const isSearching = useSelector((state) => state.search.isSearching);
@@ -13,6 +15,7 @@ const LogoSearch = () => {
 
   const logout = () => {
     dispatch(logOut());
+
 
 }
   return (
