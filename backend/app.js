@@ -10,8 +10,6 @@ const userRoute = require("./routes/UserRoute");
 const postRoute = require("./routes/PostRoute");
 const uploadRoute = require("./routes/UploadRoute");
 
-// routes
-
 
 
 // middleware
@@ -34,11 +32,17 @@ app.use("/user", userRoute);
 app.use("/posts", postRoute);
 app.use("/upload", uploadRoute);
 
+app.use(express.static("public"));
+app.use("/images", express.static("images"));
+
+
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
+
+
 
 module.exports = app;
   
