@@ -1,34 +1,34 @@
 import * as AuthApi from "../api/AuthRequest.js";
 
-export const logIn = (formData, navigate) => async(dispatch) => {
+export const logIn = (formData) => async (dispatch) => {
 
-  dispatch({type:"AUTH_START"})
+  dispatch({ type: "AUTH_START" })
   try {
-    const {data} = await AuthApi.logIn(formData);
-    dispatch({type:"AUTH_SUCCESS", data: data})
+    const { data } = await AuthApi.logIn(formData);
+    dispatch({ type: "AUTH_SUCCESS", data: data })
 
   } catch (err) {
-    dispatch({type:"AUTH_FAIL"})
+    dispatch({ type: "AUTH_FAIL" })
   }
 }
 
-export const signUp = (formData) => async(dispatch) => {
+export const signUp = (formData) => async (dispatch) => {
 
-  dispatch({type:"SIGNUP_START"})
+  dispatch({ type: "SIGNUP_START" })
   try {
-    const {data} = await AuthApi.signUp(formData);
-    dispatch({type:"SIGNUP_SUCCESS", data: data});
+    const { data } = await AuthApi.signUp(formData);
+    dispatch({ type: "SIGNUP_SUCCESS", data: data });
   } catch (err) {
-    dispatch({type:"SIGNUP_FAIL"})
+    dispatch({ type: "SIGNUP_FAIL" })
   }
 }
 
-export const logOut= () => async(dispatch) => {
+export const logOut = () => async (dispatch) => {
 
   try {
     await AuthApi.logOut();
-    dispatch({type:"LOGOUT_SUCCESS"});
+    dispatch({ type: "LOGOUT_SUCCESS" });
   } catch (err) {
-    dispatch({type:"LOGOUT_FAIL"})
+    dispatch({ type: "LOGOUT_FAIL" })
   }
 }

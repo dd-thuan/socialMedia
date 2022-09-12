@@ -12,8 +12,8 @@ exports.registerUser = async (req, res) => {
   const newUser = new UserModel(req.body);
 
   try {
-    const duplicate = await UserModel.findOne({email})
-    if(duplicate) {
+    const duplicate = await UserModel.findOne({ email })
+    if (duplicate) {
       return res.status(400).json({ message: "Email already exists" });
     }
 
@@ -22,8 +22,8 @@ exports.registerUser = async (req, res) => {
     const token = jwt.sign({
       email: user.email,
       id: user._id,
-    }, process.env.JWT_KEY, {expiresIn:"1h"})
-    res.status(200).json({user, token});
+    }, process.env.JWT_KEY, { expiresIn: "1h" })
+    res.status(200).json({ user, token });
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -31,7 +31,7 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body
-  
+
 
   try {
     const user = await UserModel.findOne({ email: email });
@@ -40,13 +40,13 @@ exports.loginUser = async (req, res) => {
       const comparePassword = await bcrypt.compare(password, user.password);
 
       if (!comparePassword) {
-        res.status(400).json({ message: 'Invalid password'});
+        res.status(400).json({ message: 'Invalid password' });
       } else {
         const token = jwt.sign({
           email: user.email,
           id: user._id,
-        }, process.env.JWT_KEY, {expiresIn:"1h"})
-        res.status(200).json({user, token});
+        }, process.env.JWT_KEY, { expiresIn: "1h" })
+        res.status(200).json({ user, token });
       }
     }
   } catch (error) {

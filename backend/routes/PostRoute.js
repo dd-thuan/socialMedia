@@ -8,9 +8,9 @@ router.post('/', createPost);
 router.put('/:id/like', likePost);
 router.get('/:id/timeline', getTimelinePosts);
 
-// router.route('/:id')
-//   .get(getPost)
-//   .delete(deletePost)
-//   .put(updatePost);
+router.route('/:id')
+  .get(getPost)
+  .delete(deletePost)
+  .put(updatePost);
 
 module.exports = router

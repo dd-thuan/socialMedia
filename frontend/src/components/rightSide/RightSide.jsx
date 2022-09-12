@@ -6,13 +6,17 @@ import Bell from "@iconscout/react-unicons/icons/uil-bell";
 import "./RightSide.css";
 import TrendCard from '../trendCard/TrendCard';
 import ShareModal from "../shareModal/ShareModal";
+import { Link } from 'react-router-dom';
 
 const RightSide = () => {
   const [modalOpened, setModalOpened] = useState(false)
   return (
     <div className="rightSide">
       <div className="navIcons">
+        <Link to="../home">
         <Home />
+        </Link>
+       
         <Comment />
         <Bell />
         <Setting />
