@@ -7,13 +7,15 @@ const authReducer = (
       return { ...state, loading: true, error: false }
     case 'AUTH_SUCCESS':
     case 'SIGNUP_SUCCESS':
-    case "UPDATE_SUCCESS":
       localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
       return { ...state, authData: action.data, loading: false, error: false }
     case 'AUTH_FAIL':
     case 'SIGNUP_FAIL':
     case "UPDATE_FAIL":
       return { ...state, loading: false, error: true }
+
+      case "UPDATE_SUCCESS":
+        return { ...state, authData: action.data, loading: false, error: false }
 
 
     case "FOLLOW_USER":

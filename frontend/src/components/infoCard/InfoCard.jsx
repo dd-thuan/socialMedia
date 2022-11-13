@@ -51,24 +51,48 @@ const InfoCard = () => {
         ) : ("")}
       </div>
 
+      
       <div className="info">
+        
         <span>
-          <b>Status</b>
-          <span>{profileUser.relationship}</span>
+          <b>Fullname: </b>
+          <span>{profileUser.lastname + profileUser.firstname ? profileUser.lastname +  profileUser.firstname : "Nothing..." }</span>
+        </span>
+      </div>
+
+      <div className="info">
+        
+        <span>
+          <b>Username: </b>
+          <span>{profileUser.username ? profileUser.username : "Nothing..." }</span>
+        </span>
+      </div>
+      <div className="info">
+        
+        <span>
+          <b>Status: </b>
+          <span>{profileUser.relationship ? profileUser.relationship : "Nothing..." }</span>
         </span>
       </div>
 
       <div className="info">
         <span>
-          <b>Lives in</b>
-          <span>{profileUser.livesIn}</span>
+          <b>Lives in: </b>
+          <span>{profileUser.livesIn ? profileUser.livesIn : "Nothing..."}</span>
         </span>
       </div>
 
       <div className="info">
         <span>
-          <b>Works at</b>
-          <span>{profileUser.worksAt}</span>
+          <b>Works at: </b>
+          <span>{profileUser.worksAt ? profileUser.worksAt : "Nothing..."}</span>
+        </span>
+      </div>
+      <div className="info">
+        
+        <span>
+          <b>Country: </b>
+          <span>{profileUser.country ? profileUser.country : "Nothing..." }</span>
         </span>
       </div>
 
