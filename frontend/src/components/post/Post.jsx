@@ -26,7 +26,7 @@ const Post = ({ data }) => {
   return (
     <div className='post'>
 
-      <img src={data.imageProfile.url} alt={data.name} />
+      <img src={data.image.url} alt={data.name} />
       <div className="postAct" >
         {liked
           ? <Heart color="pink" onClick={handleHeart} alt="" />
