@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
+const cloudinary = require("cloudinary");
 
 
 
@@ -36,8 +37,10 @@ exports.getAllUsers = async (req, res) => {
 
 
 exports.updateUser = async (req, res) => {
+
   const id = req.params.id
-  const { _id, currentUserStatus, password } = req.body
+  
+  const { _id, currentUserStatus, password, imageProfile, imageCover } = req.body
   if (id === _id) {
     try {
       if (password) {
@@ -45,17 +48,43 @@ exports.updateUser = async (req, res) => {
         req.body.password = await bcrypt.hash(password, salt);
       }
 
-      const user = await User.findByIdAndUpdate(id, req.body, {
-        new: true,
-        useFindAndModify: false
-      })
+      if (imageProfile === "") {
+       
+        await cloudinary.v2.uploader.destroy(user.imageProfile.public_id);
+       const myCloud = await cloudinary.v2.uploader.upload(imageProfile, {
+         folder: "profile",
+       });
+       user.imageProfile.public_id = myCloud.public_id;
+       user.imageProfile.url = myCloud.secure_url;
+     } 
 
-      // const token = jwt.sign({
-      //   email: user.email,
-      //   id: user._id,
-      // }, process.env.JWT_KEY, { expiresIn: "1h" })
-      // console.log({user, token})
+     
+
+
+     if (imageCover === "") {
+      await cloudinary.v2.uploader.destroy(user.imageCover.public_id);
+     
+     const myCloud = await cloudinary.v2.uploader.upload(imageCover, {
+       folder: "profile",
+     });
+     user.imageCover.public_id = myCloud.public_id;
+     user.imageCover.url = myCloud.secure_url;
+   } 
+
+
+  
+   const user = await User.findByIdAndUpdate(id, req.body, {
+    new: true,
+    useFindAndModify: false
+  })
+
+
+
+
+
       res.status(200).json({ user });
+      console.log(imageProfile);
+      console.log(imageCover);
     } catch (error) {
       res.status(500).json(error)
     }

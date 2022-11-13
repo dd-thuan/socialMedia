@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
+
+
 const authRoute = require("./routes/AuthRoute");
 const userRoute = require("./routes/UserRoute");
 const postRoute = require("./routes/PostRoute");
@@ -15,6 +18,7 @@ const uploadRoute = require("./routes/UploadRoute");
 // middleware
 app.use(bodyParser.json({ limit: "30mb", extened: "true" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
+app.use(fileUpload());
 app.use(cors());
 
 dotenv.config({path:"backend/config/config.env"});

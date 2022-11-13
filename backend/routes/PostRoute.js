@@ -3,7 +3,7 @@ const { createPost, getAllPosts, getPost, updatePost, deletePost, likePost, getT
 
 const router = express.Router();
 
-// router.get('/posts', getAllPosts);
+router.get('/posts', getAllPosts);
 router.post('/', createPost);
 router.put('/:id/like', likePost);
 router.get('/:id/timeline', getTimelinePosts);
