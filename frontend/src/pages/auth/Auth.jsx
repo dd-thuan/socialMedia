@@ -9,7 +9,7 @@ const Auth = () => {
     email: "",
     username: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   };
 
   const dispatch = useDispatch()

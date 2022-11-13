@@ -10,21 +10,23 @@ import { likePost } from '../../api/PostRequest';
 const Post = ({ data }) => {
   const { user } = useSelector((state) => state.authReducer.authData)
 
-  //error when upload in homepage
-  const [liked, setLiked] = useState(data.likes.includes(user._id)) //data.likes.includes(user._id)
-  const [likes, setLikes] = useState(data.likes.length) //data.likes.length
 
-  const serverPublic = process.env.REACT_PUBLIC_IMAGE_FOLDER
+  //error when upload in homepage
+  const [liked, setLiked] = useState() //data.likes.includes(user._id)
+  const [likes, setLikes] = useState() //data.likes.length
+
+
 
   const handleHeart = () => {
     setLiked((prev) => !prev);
     likePost(data._id, user._id);
     liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1)
   }
+<q></q>
   return (
     <div className='post'>
-      <img src={data.image ? serverPublic + data.image : ''} alt="img"
-      />
+
+      <img src={data.image.url} alt={data.name} />
       <div className="postAct" >
         {liked
           ? <Heart color="pink" onClick={handleHeart} alt="" />

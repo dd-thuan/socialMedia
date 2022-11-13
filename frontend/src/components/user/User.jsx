@@ -9,8 +9,6 @@ const User = ({ person }) => {
     person.followers.includes(user._id)
   )
 
-  const serverPublic = process.env.REACT_PUBLIC_IMAGE_FOLDER;
-
   const handleFollow = () => {
     following
       ? dispatch(unFollowUser(person._id, user))
@@ -22,9 +20,7 @@ const User = ({ person }) => {
   return (
     <div className="follower">
       <div>
-        {/* <img src={person.img} alt="img" className='followerImg' /> */}
-        <img src={person.imageProfile ? serverPublic + person.imageProfile :
-          serverPublic + "1660836478197Bee.png"} alt="" />
+        <img src={person.imageProfile.url} alt="img" className='followerImg' />
         <div className="name">
           <span>{person.username}</span>
           <span>@{person.email}</span>

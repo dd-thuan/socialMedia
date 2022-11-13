@@ -7,17 +7,12 @@ import img from "../../img/Bee.png";
 const ProfileCard = ({ location }) => {
   const { user } = useSelector((state) => state.authReducer.authData)
   const posts = useSelector((state) => state.postReducer.posts)
-  const serverPublic = process.env.REACT_PUBLIC_IMAGE_FOLDER
 
   return (
     <div className='profileCard'>
       <div className="profileImages">
-        {/* <img src={user.imageCover ? serverPublic + user.imageCover : serverPublic + "1660836478197Bee.png"} alt="" />
-        <img src={user.imageProfile ? serverPublic + user.imageProfile : serverPublic + "1660894371702Screen Shot 2022-07-22 at 6.29.05 PM.png"} alt="" /> */}
-
-        <img src={img} alt="" />
-        <img src={img} alt="" />
-
+        <img src={user.imageCover.url == null ? img : user.imageCover.url  } alt="" />
+        <img src={user.imageProfile.url == null ? img : user.imageProfile.url  } alt="" />
       </div>
 
       <div className="profileName">
@@ -42,7 +37,7 @@ const ProfileCard = ({ location }) => {
             <>
               <div className="verticalLine"></div>
               <div className="follow">
-                <span>{posts.filter((post)=> post.userId === user._id).length}</span>
+                <span>{posts.filter((post) => post.userId === user._id).length}</span>
                 <span>Posts</span>
               </div>
             </>
@@ -52,7 +47,7 @@ const ProfileCard = ({ location }) => {
       </div>
       {location === "profilePage" ? "" :
         <span>
-          <Link to={`/profile/${user._id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+          <Link to={`/profile/${user._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             My Profile
           </Link>
         </span>

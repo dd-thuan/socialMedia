@@ -9,7 +9,7 @@ const FollowesCard = () => {
   const [persons, setPersons] = useState([]);
   const { user } = useSelector((state) => state.authReducer.authData);
 
-  const serverPublic = process.env.REACT_PUBLIC_IMAGE_FOLDER
+
 
 
   useEffect(() => {
