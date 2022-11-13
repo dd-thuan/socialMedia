@@ -1,16 +1,35 @@
 const Post = require('../models/PostModel');
 const User = require("../models/UserModel");
 const mongoose = require('mongoose');
+const cloudinary = require('cloudinary');
 
 exports.createPost = async (req, res) => {
-  const post = new Post(req.body);
-
   try {
-    await post.save();
-    res.status(200).json({ message: 'Post created successfully.', post: post, });
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+      folder: "posts",
+    });
+
+    const { desc, userId, } = req.body;
+
+    const post = await Post.create({
+      desc,
+      userId,
+      image: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    });
+    res.status(201).json({
+      success: true,
+      post,
+    });
+    console.log(post);
+
   } catch (err) {
-    res.status(500).json({ message: err.toString() });
+    console.error(err);
   }
+
+
 }
 
 exports.getPost = async (req, res) => {
@@ -38,10 +57,9 @@ exports.getAllPosts = async (req, res) => {
 }
 
 exports.updatePost = async (req, res) => {
-  const id = req.params.id;
-  const { userId } = req.body;
+
+  const post = await Post.findById(id);
   try {
-    const post = await Post.findById(id);
     if (post.userId === userId) {
       await post.updateOne({ $set: req.body })
       res.status(200).json({
@@ -55,6 +73,7 @@ exports.updatePost = async (req, res) => {
     res.status(500).json({ message: err });
   }
 }
+
 
 exports.deletePost = async (req, res) => {
   const id = req.params.id;
@@ -99,7 +118,7 @@ exports.getTimelinePosts = async (req, res) => {
   const userId = req.params.id;
 
   try {
-    const currentUserPosts = await Post.find({ userId : userId });
+    const currentUserPosts = await Post.find({ userId: userId });
     const followingPosts = await User.aggregate([
       {
         $match: {
