@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
 import "./PostShare.css";
 import { useSelector, useDispatch } from "react-redux";
-import ProfileImg from "../../img/Lock.png";
+import { uploadPost } from '../../actions/UploadAction';
 import UilScenery from "@iconscout/react-unicons/icons/uil-scenery";
 import UilPlayCircle from "@iconscout/react-unicons/icons/uil-play-circle";
 import UilSchdule from "@iconscout/react-unicons/icons/uil-schedule";
 import UilLocationPoint from "@iconscout/react-unicons/icons/uil-location-point";
 import UilTimes from "@iconscout/react-unicons/icons/uil-times";
-import { uploadImage, uploadPost } from '../../actions/UploadAction';
+
 import img from "../../img/Bee.png"
 
 
@@ -16,23 +16,33 @@ const PostShare = () => {
   const loading = useSelector((state) => state.postReducer.uploading);
   const { user } = useSelector((state) => state.authReducer.authData);
 
-  const serverPublic = process.env.REACT_PUBLIC_IMAGE_FOLDER
-
-  const desc = useRef();
-  const [image, setImage] = useState(null);
   const imageRef = useRef();
+  const desc = useRef();
+
+
+  const defaultImage = 'https://res.cloudinary.com/dhnhufybl/image/upload/v1663656373/posts/hxjon2bmtyfhhfwsd6y5.jpg'
+
+  const [image, setImage] = useState(defaultImage);
 
   const onImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      let img = e.target.files[0];
-      setImage(img);
-    }
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImage(reader.result);
+      }
+    };
+
   }
 
+
   const reset = () => {
+    desc.current.value = ""
     setImage(null);
-    desc.current.value = "";
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -41,39 +51,35 @@ const PostShare = () => {
       desc: desc.current.value
     }
 
+
+
     if (image) {
-      const data = new FormData();
-      const filename = Date.now() + image.name;
-      data.append("name", filename);
-      data.append("file", image);
-      newPost.image = filename;
-      console.log(newPost);
-
-      try {
-        dispatch(uploadImage(data));
-
-      } catch (error) {
-        console.log(error);
-      }
+      const myForm = new FormData();
+      myForm.append("image", image);
+      // myForm.append("desc", desc);
+      newPost.image = image
     }
+
+
+    console.log(newPost);
+
     dispatch(uploadPost(newPost));
     reset();
   }
   return (
     <div className="postShare">
-       {/* <img src={user.imageProfile ? serverPublic + user.imageProfile : 
-        serverPublic + "1660836478197Bee.png"} alt="" /> */}
-        <img src={img} alt="" />
+      <img src={user.imageProfile.url === null ? img : user.imageProfile.url } alt="" />
       <div>
         <input
-          ref={desc}
           required
           type="text" placeholder="What's happenning"
+          name="desc"
+          ref={desc}
         />
 
         <div className="postOptions">
-          <div className="option" style={{ color: "var(--photo)" }}
-            onClick={() => imageRef.current.click()}>
+
+          <div className="option" style={{ color: "var(--photo)" }} onClick={() => imageRef.current.click()}>
             <UilScenery />
             Photo
           </div>
@@ -93,17 +99,23 @@ const PostShare = () => {
             {loading ? "Uploading..." : "Share"}
           </button>
           <div style={{ display: "none" }}>
-            <input type="file" name="myImage" ref={imageRef}
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              ref={imageRef}
               onChange={onImageChange}
             />
+
           </div>
         </div>
+
         {image && (
           <div className="previewImage">
+
             <UilTimes onClick={() => setImage(null)} />
-            <img src={URL.createObjectURL(image)} alt="img" />
-          </div>
-        )}
+            <img src={image} alt="Avatar Preview" />
+          </div>)}
       </div>
     </div>
   )
