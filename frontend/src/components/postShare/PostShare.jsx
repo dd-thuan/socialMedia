@@ -68,7 +68,7 @@ const PostShare = () => {
   }
   return (
     <div className="postShare">
-      <img src={user.imageProfile.url === null ? img : user.imageProfile.url } alt="" />
+      <img src={user.imageProfile.url === null ? img : user.imageProfile.url} alt="" />
       <div>
         <input
           required

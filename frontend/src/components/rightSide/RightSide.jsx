@@ -16,8 +16,9 @@ const RightSide = () => {
         <Link to="../home">
         <Home />
         </Link>
-       
+        <Link to="../chat">
         <Comment />
+        </Link>
         <Bell />
         <Setting />
       </div>
