@@ -11,7 +11,8 @@ const fileUpload = require("express-fileupload");
 const authRoute = require("./routes/AuthRoute");
 const userRoute = require("./routes/UserRoute");
 const postRoute = require("./routes/PostRoute");
-// const uploadRoute = require("./routes/UploadRoute");
+const chatRoute = require("./routes/ChatRoute");
+const messageRoute = require("./routes/MessageRoute");
 
 
 
@@ -34,17 +35,15 @@ mongoose.connect(process.env.DB_URI, {
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/posts", postRoute);
-// app.use("/upload", uploadRoute);
-
-app.use(express.static("public"));
-app.use("/images", express.static("images"));
+app.use("/chat", chatRoute);
+app.use("/message", messageRoute);
 
 
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-});
+}); 
 
 
 

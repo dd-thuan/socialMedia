@@ -58,9 +58,7 @@ exports.updateUser = async (req, res) => {
        user.imageProfile.url = myCloud.secure_url;
      } 
 
-     
-
-
+  
      if (imageCover === "") {
       await cloudinary.v2.uploader.destroy(user.imageCover.public_id);
      
@@ -70,8 +68,7 @@ exports.updateUser = async (req, res) => {
      user.imageCover.public_id = myCloud.public_id;
      user.imageCover.url = myCloud.secure_url;
    } 
-
-
+  
   
    const user = await User.findByIdAndUpdate(id, req.body, {
     new: true,
