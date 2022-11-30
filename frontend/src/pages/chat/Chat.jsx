@@ -1,57 +1,3 @@
-// import React, { useState, useEffect } from 'react'
-// import { useSelector } from 'react-redux'
-// import { userChats } from '../../api/ChatRequest'
-// import Conversation from '../../components/conversation/Conversation'
-// import LogoSearch from '../../components/logoSearch/LogoSearch'
-// import './Chat.css'
-
-
-// const Chat = () => {
-//   const { user } = useSelector((state) => state.authReducer.authData)
-//   const [chats, setChats] = useState([])
-
-//   useEffect(() => {
-//     const getChat = async() => {
-//       try {
-//         const { data } = await userChats(user._id)
-//         setChats(data)
-//         console.log(data)
-
-//       } catch (err) {
-//         console.log(err)
-//       }
-//     }
-//     getChat()
-//   }, [user]);
-//   return (
-//     <div className="Chat">
-//       <div className="Left-side-chat">
-//         <LogoSearch />
-
-//         <h2>Chat</h2>
-
-//         <div className="Chat-container">
-//           <div className="Chat-list">
-//             {chats.map((chat) => (
-//               <div>
-//                 <Conversation data={chat} currentUserId={user._id} />
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="Right-side-chat">
-//         rightSide
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Chat
-
-
-
 import React, { useRef, useState } from "react";
 import ChatBox from "../../components/ChatBox/ChatBox.js";
 import NavIcons from "../../components/NavIcons/NavIcons.js";
@@ -92,6 +38,7 @@ const Chat = () => {
     socket.current.emit("new-user-add", user._id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
+      console.log(setOnlineUsers)
     });
   }, [user]);
 

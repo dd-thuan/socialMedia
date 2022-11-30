@@ -91,11 +91,9 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
                 <div>
                   <img
                     src={
-                      userData?.profilePicture
-                        ? process.env.REACT_APP_PUBLIC_FOLDER +
-                          userData.profilePicture
-                        : process.env.REACT_APP_PUBLIC_FOLDER +
-                          "defaultProfile.png"
+                      userData?.imageProfile.url
+                        ? userData?.imageProfile.url
+                        : "defaultProfile.png"
                     }
                     alt="Profile"
                     className="followerImage"
